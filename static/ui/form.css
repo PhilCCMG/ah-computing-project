@@ -1,0 +1,20 @@
+.form input {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    min-width: 45%;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 5px;
+}
+
+.form input:focus {
+    border: 1px solid #ababab;
+}
+
+.form input[type="submit"] {
+    background: #3F51B5;
+    color: white;
+    font-weight: 600;
+}
