@@ -2,8 +2,14 @@
 require_once "Installer.php";
 
 class Database {
+    /**
+     * @var Database The database instance.
+     */
+    public static $instance;
+
     public function __construct()
     {
+        self::$instance = $this;
         $this->database = new PDO(
             "mysql:host=localhost;dbname=advancedhigher;charset=utf8mb4",
             "root",
@@ -19,6 +25,15 @@ class Database {
     }
 
     /**
+     * Get the instance of the database.
+     * @return Database The database instance
+     */
+    public static function getInstance()
+    {
+        return self::$instance;
+    }
+
+    /**
      * Check to see if the website is installed (is the database initialised)
      * @return void
      */
@@ -28,6 +43,17 @@ class Database {
             // Install system
             new Installer($this->getDatabase());
         }
+    }
+
+    /**
+     * Does a table in the database have a row in a column?
+     * @param string $table The table name
+     * @param string $column The column name
+     * @param string $row The row value
+     * @return bool If the row exists in the table/column.
+     */
+    public function hasValue(string $table, string $column, string $row) {
+        return false;
     }
 
     /**
