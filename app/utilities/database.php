@@ -1,4 +1,5 @@
 <?php
+require_once "Installer.php";
 
 class Database {
     public function __construct()
@@ -17,16 +18,21 @@ class Database {
         }
     }
 
+    /**
+     * Check to see if the website is installed (is the database initialised)
+     * @return void
+     */
     private function checkForInstallation()
     {
         if(!$this->hasTable('users')) {
-
+            // Install system
+            new Installer($this->getDatabase());
         }
     }
 
     /**
      * Get the database object.
-     * @return false|mysqli
+     * @return PDO
      */
     public function getDatabase()
     {
@@ -35,6 +41,7 @@ class Database {
 
     /**
      * Close the database connection.
+     * @return void
      */
     public function closeDatabase()
     {
@@ -42,6 +49,10 @@ class Database {
         $this->database = null;
     }
 
+    /**
+     * Does a table exist on the database?
+     * @param $tableName String The table name
+     */
     private function hasTable($tableName)
     {
         $query = $this
