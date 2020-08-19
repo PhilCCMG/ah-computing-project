@@ -1,7 +1,29 @@
 .hero-section {
-    min-height: 33vh;
+    min-height: 45vh;
     background: linear-gradient(to bottom, #3e4b66, #4286f4);
     text-align: center;
+    position: relative;
+}
+
+.svg-shape-layer-bottom {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.svg-shape-layer-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 59px;
+}
+
+.svg-shape-layer-bottom .shape-fill {
+    fill: #eee;
 }
 
 .hero-section h1 {

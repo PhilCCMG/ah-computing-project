@@ -15,6 +15,7 @@
     </title>
     <?php
         include_once $_SERVER["DOCUMENT_ROOT"] . "/app/molecules/header/meta-links.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/app/molecules/header/font-embeds.php";
     ?>
 </head>
 <body>
