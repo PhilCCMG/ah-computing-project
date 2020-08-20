@@ -3,6 +3,7 @@
  * This is the main page controller, which has all utilities for each page on it, along with
  * useful functions, controllers and classes.
  */
+require_once "../config/config.php";
 require_once "HTMLHelper.php";
 
 class Page {
