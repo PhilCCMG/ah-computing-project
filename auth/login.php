@@ -1,6 +1,7 @@
 <?php
 include_once "../app/utilities/page.php";
 $page = new Page("Login");
+
 $page->renderHeader();
 ?>
 

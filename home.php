@@ -1,6 +1,6 @@
 <?php
 include_once "app/utilities/page.php";
-$page = new Page("Home");
+$page = new Page("Home", true);
 $page->renderHeader();
 ?>
 

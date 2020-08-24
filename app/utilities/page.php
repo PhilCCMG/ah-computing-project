@@ -13,7 +13,7 @@ class Page {
      */
     private $database;
 
-    public function __construct($title = null)
+    public function __construct($title = null, $requireLogin = false)
     {
         // Requirements
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/Database.php";
@@ -34,6 +34,11 @@ class Page {
             $username->execute();
             $data = $username->fetch();
             $_SERVER['page']['user'] = User::get($data['username']);
+        } else {
+            if($requireLogin) {
+                header('Location: /auth/login.php');
+                return;
+            }
         }
 
         // Set params
