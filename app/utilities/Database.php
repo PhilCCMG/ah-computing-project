@@ -1,5 +1,6 @@
 <?php
 require_once "Installer.php";
+require_once "Config.php";
 
 class Database {
     /**
@@ -10,10 +11,13 @@ class Database {
     public function __construct()
     {
         self::$instance = $this;
+
+        $databaseConfig = Config::get()["database"];
+
         $this->database = new PDO(
-            "mysql:host=localhost;dbname=advancedhigher;charset=utf8mb4",
-            "root",
-            ""
+            sprintf("mysql:host=%s;dbname=%s;charset=utf8mb4", $databaseConfig["hostname"], $databaseConfig["database"]),
+            $databaseConfig["username"],
+            $databaseConfig["password"]
         );
 
         if ($this->database->connect_error) {
@@ -52,8 +56,19 @@ class Database {
      * @param string $row The row value
      * @return bool If the row exists in the table/column.
      */
-    public function hasValue(string $table, string $column, string $row) {
-        return false;
+    public function hasValue(String $table, String $column, String $row) {
+
+        $query = $this
+            ->getDatabase()
+            ->prepare("SELECT :column FROM :table WHERE `:column`=':row' LIMIT 1");
+        $query->bindParam(":table", $table);
+        $query->bindParam(":column", $column);
+        $query->bindParam(":row", $row);
+        $query->execute();
+
+        // If there is one row (as the limit is defined as one), then there is a row in the database by the name.
+        return
+            $query->rowCount() == 1;
     }
 
     /**

@@ -7,8 +7,8 @@
 <head>
     <title>
         <?php
-        if(isset($_PAGE["title"])) {
-            echo $_PAGE["title"] . " | ";
+        if(isset($_SERVER["page"]["title"])) {
+            echo $_SERVER["page"]["title"] . " | ";
         }
         ?>
         Social Media Website

@@ -1,3 +1,6 @@
+.navigation-container {
+    background: #111;
+}
 
 .navigation {
     display: flex;

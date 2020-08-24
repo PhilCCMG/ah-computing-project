@@ -4,23 +4,7 @@
     $page->renderHeader();
 ?>
         <div class="hero-section">
-            <div class="navigation">
-                <ul>
-                    <li>
-                        <img src="/static/images/SVG/logo.svg" alt="Site Logo" class="brand-logo">
-                    </li>
-                    <li>
-                        <a href="#">
-                            Trending
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            What's New
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <?php $page->renderNavbar(); ?>
             <div>
                 <h1>
                     A basic social network

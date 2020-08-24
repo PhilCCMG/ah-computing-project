@@ -3,7 +3,7 @@
  * This is the main page controller, which has all utilities for each page on it, along with
  * useful functions, controllers and classes.
  */
-require_once "../config/config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/config/config.php";
 require_once "HTMLHelper.php";
 
 class Page {
@@ -15,11 +15,13 @@ class Page {
     public function __construct($title = null)
     {
         // Requirements
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/database.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/Database.php";
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/settings.php";
 
         // Instantiate Controllers
-        $_PAGE = [];
+        $_SERVER["page"] = [];
+        if($title !== null)
+            $_SERVER["page"]["title"] = $title;
         $this->database = new Database();
 
         // Set params
@@ -42,11 +44,22 @@ class Page {
         include_once $_SERVER["DOCUMENT_ROOT"] . "/app/display/header.php";
     }
 
+    public function renderNavbar()
+    {
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/app/molecules/header/navbar.php";
+    }
+
     public function endPage($showFooter)
     {
         if (!is_null($this->getDatabase()))
             $this->getDatabase()->closeDatabase();
         if($showFooter)
-            include_once "app/display/footer.php";
+            include_once $_SERVER["DOCUMENT_ROOT"] . "/app/display/footer.php";
+    }
+
+    public function getConfig() {
+        if(!isset($_SERVER["APPLICATION_CONFIG"]))
+            die("Failed to load the application configuration (not generated on server)");
+        return $_SERVER["APPLICATION_CONFIG"];
     }
 }

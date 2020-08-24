@@ -13,21 +13,15 @@ if(isset($_POST["THIS_FORM"])) {
         } else if ($database->hasValue("users", "username", $username)) {
             echo HTMLHelper::inlineError("The username is already in use.");
         }
-        else {
-            // Create the user account
-
-        }
     }
 }
 
 ?>
 
-<form method="POST" action="" class="form form-create-account">
+<form method="POST" action="" class="form form-login">
     <? // This allows us to identify the form when used on multiple pages. ?>
-    <input type="hidden" name="THIS_FORM" value="CREATE_ACCOUNT">
-    <input type="text" placeholder="Username" name="username" required>
-    <input type="text" placeholder="Email Address" name="email" required>
+    <input type="hidden" name="THIS_FORM" value="LOGIN">
+    <input type="text" placeholder="Username or Email Address" name="username" required>
     <input type="password" placeholder="Password" name="password" required>
-    <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
     <input type="submit" value="Create Account">
 </form>

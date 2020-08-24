@@ -8,6 +8,7 @@
 // stylesheet.
 $stylesheets = $_SERVER["DOCUMENT_ROOT"] . "/static/ui/*.css";
 foreach (glob($stylesheets) as $stylesheet) {
-    $stylesheet = substr($stylesheet, strlen(getcwd()));
-    echo "<link rel='stylesheet' href='$stylesheet'>";
+    $array = explode("/", $stylesheet);
+    $stylesheet = $array[sizeof($array) - 1];
+    echo "<link rel='stylesheet' href='/static/ui/$stylesheet'>";
 }

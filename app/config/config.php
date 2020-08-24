@@ -14,7 +14,7 @@ $_SERVER["APPLICATION_CONFIG"] = [
         "username" => "root",
         "password" => "",
         "port" => 3306,
-        "database" => "social_network"
+        "database" => "advancedhigher"
     ],
     "features_enabled" => [
         "account_creation" => true,
