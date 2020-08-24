@@ -29,6 +29,8 @@ if(isset($_POST["THIS_FORM"])) {
             $success = $createQuery->execute();
 
             if($success) {
+                $user = User::get($username);
+
                 echo "<meta http-equiv='refresh' content='0;URL=\"/home.php\"' />";
                 return;
             }

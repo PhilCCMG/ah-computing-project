@@ -14,13 +14,20 @@ class User
     private $email;
 
     /**
-     * User constructor.
-     * @param $username
-     * @param $email
+     * @var $id Integer The ID of the user
      */
-    public function __construct($username, $email) {
+    private $id;
+
+    /**
+     * User constructor.
+     * @param $username String
+     * @param $email String
+     * @param $id Integer
+     */
+    public function __construct($username, $email, $id) {
         $this->username = $username;
         $this->email = $email;
+        $this->id = $id;
     }
 
     /**
@@ -39,8 +46,16 @@ class User
             );
             $user->bindParam(":user", $username);
             $user = $user->fetch();
-            return new self($user["username"], $user["email"]);
+            return new self($user["username"], $user["email"], $user["id"]);
         }
         return null;
+    }
+
+    /**
+     * Getter for the User ID.
+     * @return int The User ID
+     */
+    public function getId() {
+        return $this->id;
     }
 }
