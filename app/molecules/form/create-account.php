@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/utilities/User.php';
+
 if(isset($_POST["THIS_FORM"])) {
     if ($_POST["THIS_FORM"] === "CREATE_ACCOUNT") {
         $username = $_POST["username"];
@@ -12,10 +14,25 @@ if(isset($_POST["THIS_FORM"])) {
             echo HTMLHelper::inlineError("The email address is already in use.");
         } else if ($database->hasValue("users", "username", $username)) {
             echo HTMLHelper::inlineError("The username is already in use.");
+        } else if(!is_null(User::get($username))) {
+            echo HTMLHelper::inlineError("There is already a user with that username");
         }
         else {
             // Create the user account
+            $createQuery = $database
+                ->getDatabase()
+                ->prepare("INSERT INTO users (`username`, `email`, `password`) VALUES (:username, :email, :password)");
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+            $createQuery->bindParam(':username', $username);
+            $createQuery->bindParam(':email', $email);
+            $createQuery->bindParam(':password', $hashed_password);
+            $success = $createQuery->execute();
 
+            if($success) {
+                echo "<meta http-equiv='refresh' content='0;URL=\"/home.php\"' />";
+                return;
+            }
+            echo HTMLHelper::inlineError('An unknown error occurred');
         }
     }
 }

@@ -29,7 +29,11 @@ class User
      */
     public static function get($username) {
         $database = Database::getInstance();
-        if ($database->hasValue("users", "username", $username)) {
+        if ($database->hasValue(
+            "users",
+            "username",
+            $username
+        )) {
             $user = $database->getDatabase()->prepare(
                 "SELECT * FROM users WHERE `username`=':user' LIMIT 1"
             );

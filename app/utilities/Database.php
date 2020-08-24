@@ -6,7 +6,7 @@ class Database {
     /**
      * @var Database The database instance.
      */
-    public static $instance;
+    public static $instance = null;
 
     public function __construct()
     {
@@ -34,6 +34,8 @@ class Database {
      */
     public static function getInstance()
     {
+        if(self::$instance === null)
+            new self();
         return self::$instance;
     }
 
@@ -56,14 +58,12 @@ class Database {
      * @param string $row The row value
      * @return bool If the row exists in the table/column.
      */
-    public function hasValue(String $table, String $column, String $row) {
+    public function hasValue(String $table, String $column, String $value) {
 
         $query = $this
             ->getDatabase()
-            ->prepare("SELECT :column FROM :table WHERE `:column`=':row' LIMIT 1");
-        $query->bindParam(":table", $table);
-        $query->bindParam(":column", $column);
-        $query->bindParam(":row", $row);
+            ->prepare("SELECT `$column` FROM $table WHERE `$column` = :value LIMIT 1");
+        $query->bindParam(":value", $value);
         $query->execute();
 
         // If there is one row (as the limit is defined as one), then there is a row in the database by the name.
