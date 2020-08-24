@@ -60,6 +60,11 @@ class User
         return $this->id;
     }
 
+    /**
+     * Validate a password with the database
+     * @param String $password the raw password
+     * @return bool If the password is valid
+     */
     public function validatePassword(String $password) : bool {
         $query = Database::getInstance()->getDatabase()->prepare('SELECT password FROM users WHERE id=:id');
         $id = $this->getId();

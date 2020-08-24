@@ -5,6 +5,7 @@
  */
 require_once $_SERVER["DOCUMENT_ROOT"] . "/app/config/config.php";
 require_once "HTMLHelper.php";
+require_once "User.php";
 
 class Page {
     /**
@@ -18,19 +19,27 @@ class Page {
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/Database.php";
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/settings.php";
 
+        // Start the Session
+        session_start();
+
         // Instantiate Controllers
         $_SERVER["page"] = [];
         if($title !== null)
             $_SERVER["page"]["title"] = $title;
         $this->database = new Database();
 
+        if(isset($_SESSION['user'])) {
+            $username = $this->database->getDatabase()->prepare('select username from users where id=:id');
+            $username->bindParam(':id', $_SESSION['user']);
+            $username->execute();
+            $data = $username->fetch();
+            $_SERVER['page']['user'] = User::get($data['username']);
+        }
+
         // Set params
         if(!is_null($title)) {
             PageSettings::setTitle($title);
         }
-
-        // Start the session
-        session_start();
     }
 
     public function getDatabase()

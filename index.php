@@ -1,7 +1,11 @@
 <?php
     include_once "app/utilities/page.php";
     $page = new Page("Welcome");
+    if(isset($_SERVER['page']['user'])) {
+        header('Location: /home.php');
+    }
     $page->renderHeader();
+
 ?>
         <div class="hero-section">
             <?php $page->renderNavbar(); ?>
