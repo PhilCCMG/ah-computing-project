@@ -9,6 +9,18 @@ html, body {
     margin: 0 auto
 }
 
+.d-block {
+    display: block !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
 .w-50 {
     width: 50vw;
 }

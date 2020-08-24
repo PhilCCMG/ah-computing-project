@@ -42,6 +42,10 @@ class Page {
         }
     }
 
+    public function user() {
+        return $_SERVER['page']['user'];
+    }
+
     public function getDatabase()
     {
         return $this->database;

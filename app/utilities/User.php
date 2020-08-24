@@ -73,4 +73,14 @@ class User
         $data = $query->fetch();
         return password_verify($password, $data['password']);
     }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }
