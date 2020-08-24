@@ -13,5 +13,4 @@ $page->renderHeader();
     <h2>Welcome back to <b>A Social Network</b>...</h2>
 </div>
 
-
 <?php $page->endPage(true); ?>
