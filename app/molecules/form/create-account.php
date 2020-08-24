@@ -30,7 +30,7 @@ if(isset($_POST["THIS_FORM"])) {
 
             if($success) {
                 $user = User::get($username);
-
+                $_SESSION['user'] = $user->getId();
                 echo "<meta http-equiv='refresh' content='0;URL=\"/home.php\"' />";
                 return;
             }

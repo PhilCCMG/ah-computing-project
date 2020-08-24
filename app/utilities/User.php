@@ -42,9 +42,10 @@ class User
             $username
         )) {
             $user = $database->getDatabase()->prepare(
-                "SELECT * FROM users WHERE `username`=':user' LIMIT 1"
+                "SELECT * FROM users WHERE `username`=:user LIMIT 1"
             );
             $user->bindParam(":user", $username);
+            $user->execute();
             $user = $user->fetch();
             return new self($user["username"], $user["email"], $user["id"]);
         }
@@ -57,5 +58,14 @@ class User
      */
     public function getId() {
         return $this->id;
+    }
+
+    public function validatePassword(String $password) : bool {
+        $query = Database::getInstance()->getDatabase()->prepare('SELECT password FROM users WHERE id=:id');
+        $id = $this->getId();
+        $query->bindParam('id', $id);
+        $query->execute();
+        $data = $query->fetch();
+        return password_verify($password, $data['password']);
     }
 }
