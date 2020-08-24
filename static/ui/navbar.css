@@ -6,6 +6,12 @@
     display: flex;
 }
 
+ul.user-nav {
+    margin-right: 40px;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
 .navigation .brand-logo {
     width: 164px;
     height: auto;

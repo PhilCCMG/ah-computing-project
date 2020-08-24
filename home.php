@@ -10,7 +10,7 @@ $page->renderHeader();
 
 <div class="container d-block">
     <h1>Hey, <?=$page->user()->getUsername();?>!</h1>
-    <h5>Welcome back to <b>A Social Network</b>!</h5>
+    <h2>Welcome back to <b>A Social Network</b>...</h2>
 </div>
 
 

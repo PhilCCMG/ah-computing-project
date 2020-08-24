@@ -13,8 +13,15 @@ class Page {
      */
     private $database;
 
+    /**
+     * @var Current the current page object
+     */
+    private static $current;
+
     public function __construct($title = null, $requireLogin = false)
     {
+        Page::$current = $this;
+
         // Requirements
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/Database.php";
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/utilities/settings.php";
@@ -45,6 +52,10 @@ class Page {
         if(!is_null($title)) {
             PageSettings::setTitle($title);
         }
+    }
+
+    public static function current() {
+        return Page::$current;
     }
 
     public function user() {
