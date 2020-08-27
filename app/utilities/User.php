@@ -52,6 +52,25 @@ class User
         return null;
     }
 
+    public static function byId(int $id)
+    {
+        $database = Database::getInstance();
+        if ($database->hasValue(
+            "users",
+            "id",
+            $id
+        )) {
+            $user = $database->getDatabase()->prepare(
+                "SELECT * FROM users WHERE `id`=:id LIMIT 1"
+            );
+            $user->bindParam(":id", $id);
+            $user->execute();
+            $user = $user->fetch();
+            return new self($user["username"], $user["email"], $user["id"]);
+        }
+        return null;
+    }
+
     /**
      * Getter for the User ID.
      * @return int The User ID

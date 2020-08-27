@@ -17,8 +17,13 @@ class Installer
     public function __construct(PDO $database)
     {
         $this->database = $database;
+        $databaseController = Database::getInstance();
 
-        $this->createUsersTable();
+        if(!$databaseController->hasTable('users'))
+            $this->createUsersTable();
+
+        if(!$databaseController->hasTable('posts'))
+            $this->createPostsTable();
     }
 
     /**
@@ -44,6 +49,26 @@ class Installer
                 	`username` TEXT,
                 	`email` TEXT,
                 	`password` LONGTEXT,
+                	PRIMARY KEY (`id`)
+                );
+            ")
+            ->execute();
+    }
+
+    /**
+     * Install the users table.
+     * @return void
+     */
+    public function createPostsTable()
+    {
+        $this
+            ->getDatabase()
+            ->prepare("
+                CREATE TABLE `posts` (
+                	`id` INT NOT NULL AUTO_INCREMENT,
+                	`poster` INT NOT NULL,
+                	`content` LONGTEXT,
+                	`posted_at` INT NOT NULL,
                 	PRIMARY KEY (`id`)
                 );
             ")

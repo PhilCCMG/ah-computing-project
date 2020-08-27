@@ -45,7 +45,7 @@ class Database {
      */
     private function checkForInstallation()
     {
-        if(!$this->hasTable('users')) {
+        if(!$this->hasTable('users') || $this->hasTable('posts')) {
             // Install system
             new Installer($this->getDatabase());
         }
@@ -94,7 +94,7 @@ class Database {
      * Does a table exist on the database?
      * @param $tableName String The table name
      */
-    private function hasTable($tableName)
+    public function hasTable($tableName)
     {
         $query = $this
             ->getDatabase()
@@ -109,7 +109,8 @@ class Database {
         }
         $query
             ->bindParam(":table", $tableName);
-        $query
+        $success = $query
             ->execute();
+        return $success;
     }
 }

@@ -1,4 +1,4 @@
-
+<?php $page = Page::current(); ?>
 <div class="navigation">
     <ul>
         <li>
@@ -6,20 +6,24 @@
                 <img src="/static/images/SVG/logo.svg" alt="Site Logo" class="brand-logo">
             </a>
         </li>
+
+
+        <?php
+        if($page->user() !== NULL) {
+        ?>
         <li>
-            <a href="#">
-                Trending
-            </a>
+            <a href="/users.php">Users</a>
         </li>
         <li>
-            <a href="#">
-                What's New
-            </a>
+            <a href="/settings.php">Settings</a>
         </li>
+        <li>
+            <a href="/logout.php">Log Out</a>
+        </li>
+        <?php } ?>
     </ul>
 
     <?php
-    $page = Page::current();
     if($page->user() !== NULL) {
         ?>
         <ul class="user-nav">

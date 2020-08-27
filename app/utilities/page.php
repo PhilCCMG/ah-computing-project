@@ -14,7 +14,7 @@ class Page {
     private $database;
 
     /**
-     * @var Current the current page object
+     * @var Page the current page object
      */
     private static $current;
 
@@ -58,6 +58,9 @@ class Page {
         return Page::$current;
     }
 
+    /**
+     * @return user|null
+     */
     public function user() {
         return $_SERVER['page']['user'];
     }
