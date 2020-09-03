@@ -80,6 +80,16 @@ class User
     }
 
     /**
+     * @return User|null Refresh the User object
+     */
+    public function refresh()
+    {
+        $user = User::byId($this->id);
+        $_SERVER['page']['user'] = $user;
+        return $user;
+    }
+
+    /**
      * Validate a password with the database
      * @param String $password the raw password
      * @return bool If the password is valid

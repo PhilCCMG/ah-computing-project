@@ -32,7 +32,7 @@
         <div class="col-homepage text-center">
             <h2>Latest Activity</h2>
             <div class="activity">
-                <span>Oh snap! There's no activity yet :(</span>
+                <?php include_once("./app/molecules/homepage/activity.php"); ?>
             </div>
         </div>
         <div class="col-homepage text-center">
