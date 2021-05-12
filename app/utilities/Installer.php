@@ -66,7 +66,7 @@ class Installer
             ->prepare("
                 CREATE TABLE `posts` (
                 	`id` INT NOT NULL AUTO_INCREMENT,
-                	`poster` INT NOT NULL,
+                	`poster` INT FOREIGN KEY REFERENCES users(id),
                 	`content` LONGTEXT,
                 	`posted_at` INT NOT NULL,
                 	PRIMARY KEY (`id`)
